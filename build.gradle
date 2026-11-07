@@ -40,7 +40,7 @@ dependencies {
 }
 
 tasks.named('processResources', ProcessResources).configure {
-    def props = [mod_id: mod_id, mod_name: mod_name, mod_authors: mod_authors]
+    def props = [mod_id: mod_id, mod_name: mod_name, mod_authors: mod_authors, mod_version: mod_version]
     inputs.properties props
     filesMatching(['META-INF/mods.toml']) { expand props }
 }
