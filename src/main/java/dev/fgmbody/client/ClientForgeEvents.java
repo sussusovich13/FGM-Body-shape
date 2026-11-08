@@ -28,5 +28,6 @@ public final class ClientForgeEvents {
     @SubscribeEvent
     public static void logout(ClientPlayerNetworkEvent.LoggingOut e) {
         BodyShapeStore.CLIENT.clear();
+        GlutePhysics.clear();
     }
 }

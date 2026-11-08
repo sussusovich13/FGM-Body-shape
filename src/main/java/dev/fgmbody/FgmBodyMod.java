@@ -9,7 +9,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 @Mod(FgmBodyMod.MODID)
 public class FgmBodyMod {
     public static final String MODID = "fgmbody";
-    private static final String PROTOCOL = "2";
+    private static final String PROTOCOL = "3";
 
     // Own channel: no conflicts with FGM / FGM Plus packets.
     // "v -> true" lets players join servers that don't have this addon.

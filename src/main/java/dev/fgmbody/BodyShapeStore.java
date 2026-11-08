@@ -31,15 +31,16 @@ public final class BodyShapeStore {
         save(local);
     }
 
+    private static float f(JsonObject o, String key) {
+        return o.has(key) ? o.get(key).getAsFloat() : 0f;
+    }
+
     private static BodyShape load() {
         try {
             if (Files.exists(FILE)) {
                 JsonObject o = JsonParser.parseString(Files.readString(FILE)).getAsJsonObject();
-                return new BodyShape(
-                        o.get("glutesSize").getAsFloat(),
-                        o.get("glutesHeight").getAsFloat(),
-                        o.get("hipsWidth").getAsFloat(),
-                        o.has("waist") ? o.get("waist").getAsFloat() : 0f).clamped();
+                return new BodyShape(f(o, "glutesSize"), f(o, "glutesHeight"), f(o, "glutesRound"),
+                        f(o, "glutesPhysics"), f(o, "hipsWidth"), f(o, "waist"), f(o, "waistRound")).clamped();
             }
         } catch (Exception ignored) {}
         return BodyShape.DEFAULT;
@@ -49,8 +50,11 @@ public final class BodyShapeStore {
         JsonObject o = new JsonObject();
         o.addProperty("glutesSize", s.glutesSize());
         o.addProperty("glutesHeight", s.glutesHeight());
+        o.addProperty("glutesRound", s.glutesRound());
+        o.addProperty("glutesPhysics", s.glutesPhysics());
         o.addProperty("hipsWidth", s.hipsWidth());
         o.addProperty("waist", s.waist());
+        o.addProperty("waistRound", s.waistRound());
         try {
             Files.writeString(FILE, o.toString());
         } catch (IOException e) {
